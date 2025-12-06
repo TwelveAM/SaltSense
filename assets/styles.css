@@ -252,3 +252,64 @@ input[type=number]:focus::after {
   color: #6b7280;
   font-size: 0.85rem;
 }
+/* =============== INSTALL POPUP =============== */
+
+.install-popup {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #020617;
+  border: 1px solid #1f2937;
+  padding: 18px 22px;
+  border-radius: 16px;
+  width: 300px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.install-popup.hidden {
+  display: none;
+}
+
+.install-box h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  color: #e2e8f0;
+}
+
+.install-box p {
+  margin: 0 0 14px 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.install-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.install-yes {
+  padding: 8px 14px;
+  background: #16a34a;
+  color: #022c22;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.install-no {
+  padding: 8px 10px;
+  background: #374151;
+  color: #e5e7eb;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
