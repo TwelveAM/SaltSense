@@ -11,7 +11,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/SALT-32x32.png">
   <link rel="shortcut icon" href="assets/SALT-32x32.png">
 
-  <!-- Banner Logo -->
   <link rel="preload" as="image" href="assets/saltsense-banner.png">
 
   <link rel="stylesheet" href="assets/styles.css">
@@ -19,31 +18,26 @@
 </head>
 
 <body>
-  <!-- HEADER WITH LOGO -->
+
+  <!-- HEADER WITH PERFECT-SIZE BANNER -->
   <header class="ss-header">
-    <div class="ss-header-inner" style="display:flex;align-items:center;justify-content:center;">
-      <img src="assets/saltsense-banner.png"
-           alt="SaltSense Logo"
-           style="height:130px;width:630px;object-fit:contain;">
+    <div class="ss-header-inner banner-wrap">
+      <img src="assets/saltsense-banner.png" alt="SaltSense Logo" class="banner-img">
     </div>
   </header>
 
   <main class="ss-main">
 
-    <!-- NAV TABS -->
     <nav class="ss-nav">
       <button class="ss-tab-btn active" data-target="general">General Seasoning</button>
       <button class="ss-tab-btn" data-target="brine">Brine / Pickling</button>
       <button class="ss-tab-btn" data-target="scaling">Recipe Scaling</button>
     </nav>
 
-    <!-- ============================= -->
-    <!-- GENERAL SEASONING SECTION     -->
-    <!-- ============================= -->
+    <!-- ================= GENERAL ================= -->
     <section id="general" class="ss-card ss-card-active">
       <h2>General Seasoning</h2>
 
-      <!-- PRESETS -->
       <div class="ss-field-row">
         <label>Presets</label>
         <div class="ss-chip-row">
@@ -57,7 +51,7 @@
       <div class="ss-field-row">
         <label for="foodWeight">Food weight</label>
         <div class="ss-inline-input">
-          <input type="number" id="foodWeight" min="1" step="1" placeholder="e.g. 850">
+          <input type="number" id="foodWeight" min="1" placeholder="e.g. 850">
           <span class="ss-unit">g</span>
         </div>
       </div>
@@ -74,9 +68,9 @@
       <div class="ss-field-row">
         <label for="saltTypeGeneral">Salt type (note only)</label>
         <select id="saltTypeGeneral">
-          <option value="fine">Fine salt (fast)</option>
-          <option value="kosher">Kosher salt (mild)</option>
-          <option value="sea">Coarse sea salt (slow)</option>
+          <option value="fine">Fine salt</option>
+          <option value="kosher">Kosher salt</option>
+          <option value="sea">Sea salt</option>
         </select>
       </div>
 
@@ -84,13 +78,10 @@
       <div id="generalResult" class="ss-result"></div>
     </section>
 
-    <!-- ============================= -->
-    <!-- BRINE SECTION                 -->
-    <!-- ============================= -->
+    <!-- ================= BRINE ================= -->
     <section id="brine" class="ss-card">
       <h2>Brine / Pickling</h2>
 
-      <!-- BRINE PRESETS -->
       <div class="ss-field-row">
         <label>Presets</label>
         <div class="ss-chip-row">
@@ -103,13 +94,13 @@
       <div class="ss-field-row">
         <label for="waterAmount">Water amount</label>
         <div class="ss-inline-input">
-          <input type="number" id="waterAmount" min="1" step="1" placeholder="e.g. 2000">
+          <input type="number" id="waterAmount" min="1" placeholder="e.g. 2000">
           <span class="ss-unit">ml</span>
         </div>
       </div>
 
       <div class="ss-field-row">
-        <label for="brinePercent">Brine strength (%)</label>
+        <label for="brinePercent">Brine percentage</label>
         <div class="ss-inline-input">
           <input type="number" id="brinePercent" min="0.5" max="20" step="0.1" placeholder="e.g. 6">
           <span class="ss-unit">%</span>
@@ -130,25 +121,23 @@
       <div id="brineResult" class="ss-result"></div>
     </section>
 
-    <!-- ============================= -->
-    <!-- RECIPE SCALING                -->
-    <!-- ============================= -->
+    <!-- ================= SCALING ================= -->
     <section id="scaling" class="ss-card">
       <h2>Recipe Scaling</h2>
 
       <div class="ss-field-row">
-        <label for="origTotal">Original total (g or portions)</label>
-        <input type="number" id="origTotal" min="0.1" step="0.1" placeholder="e.g. 10">
+        <label for="origTotal">Original total</label>
+        <input type="number" id="origTotal" min="0.1" step="0.1">
       </div>
 
       <div class="ss-field-row">
         <label for="origSalt">Original salt (g)</label>
-        <input type="number" id="origSalt" min="0" step="0.1" placeholder="e.g. 12">
+        <input type="number" id="origSalt" min="0" step="0.1">
       </div>
 
       <div class="ss-field-row">
-        <label for="newTotal">New total (g or portions)</label>
-        <input type="number" id="newTotal" min="0.1" step="0.1" placeholder="e.g. 35">
+        <label for="newTotal">New total</label>
+        <input type="number" id="newTotal" min="0.1" step="0.1">
       </div>
 
       <button id="calcScaling" class="ss-primary-btn">Calculate</button>
@@ -158,7 +147,7 @@
   </main>
 
   <footer class="ss-footer">
-    <p>SaltSense — precise seasoning for real kitchens.</p>
+    SaltSense — precise seasoning for real kitchens.
   </footer>
 
 </body>
