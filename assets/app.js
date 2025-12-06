@@ -1,17 +1,16 @@
 // -------------------------
-// LOCAL STORAGE HELPERS
+// LocalStorage helpers
 // -------------------------
 function saveLS(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
-
 function loadLS(key, fallback = null) {
   const v = localStorage.getItem(key);
   return v ? JSON.parse(v) : fallback;
 }
 
 // -------------------------
-// TAB SWITCHING
+// TAB switching
 // -------------------------
 const tabButtons = document.querySelectorAll(".ss-tab-btn");
 const cards = document.querySelectorAll(".ss-card");
@@ -30,11 +29,11 @@ tabButtons.forEach((btn) => {
 });
 
 // -------------------------
-// INTENSITY CHIP LOGIC
+// INTENSITY chip logic
 // -------------------------
 let selectedIntensity = loadLS("intensity", 1.0);
-
 const intensityChips = document.querySelectorAll(".ss-chip-intensity");
+
 intensityChips.forEach((chip) => {
   if (parseFloat(chip.dataset.percent) === selectedIntensity) {
     chip.classList.add("active");
@@ -50,14 +49,14 @@ intensityChips.forEach((chip) => {
 });
 
 // -------------------------
-// ELEMENTS
+// GENERAL SEASONING
 // -------------------------
 const foodWeightInput = document.getElementById("foodWeight");
 const saltTypeGeneralSelect = document.getElementById("saltTypeGeneral");
 const generalResultDiv = document.getElementById("generalResult");
 const calcGeneralBtn = document.getElementById("calcGeneral");
 
-// Load general seasoning values
+// Load saved values
 foodWeightInput.value = loadLS("foodWeight", "");
 saltTypeGeneralSelect.value = loadLS("saltTypeGeneral", "fine");
 
@@ -69,7 +68,7 @@ calcGeneralBtn.addEventListener("click", () => {
   saveLS("saltTypeGeneral", saltType);
 
   if (!weight || weight <= 0) {
-    generalResultDiv.textContent = "Enter a valid food weight (grams).";
+    generalResultDiv.textContent = "Enter a valid food weight.";
     return;
   }
 
@@ -79,17 +78,17 @@ calcGeneralBtn.addEventListener("click", () => {
     selectedIntensity >= 2.0 ? "bold" :
     selectedIntensity >= 1.5 ? "medium" : "light";
 
-  const saltNotes = {
+  const notes = {
     fine: "Fine salt dissolves fast and evenly.",
-    kosher: "Kosher salt is milder and easier to control.",
-    sea: "Coarse sea salt melts slowly—good for finishing."
+    kosher: "Kosher salt is milder, great for control.",
+    sea: "Sea salt melts slower — good for finishing."
   };
 
   generalResultDiv.innerHTML = `
     <p><strong>${saltGrams.toFixed(1)} g</strong> salt needed.</p>
-    <p style="margin-top:4px;color:#9ca3af;font-size:0.8rem;">
-      Seasoning intensity: <strong>${intensityLabel}</strong> (${selectedIntensity.toFixed(1)}%).
-      <br>Note: ${saltNotes[saltType]}
+    <p style="color:#9ca3af;font-size:0.8rem;margin-top:4px;">
+      Intensity: <strong>${intensityLabel}</strong> (${selectedIntensity.toFixed(1)}%)
+      <br>${notes[saltType]}
     </p>
   `;
 });
@@ -97,21 +96,22 @@ calcGeneralBtn.addEventListener("click", () => {
 // -------------------------
 // GENERAL PRESETS
 // -------------------------
-const generalPresets = {
-  chicken: 1.2,
-  steak: 1.7,
-  vegetables: 1.0,
-  sauce: 1.4
-};
+const generalPresetBtns = document.querySelectorAll(".ss-preset-general");
 
-function applyGeneralPreset(val) {
-  selectedIntensity = val;
-  saveLS("intensity", selectedIntensity);
+generalPresetBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const val = parseFloat(btn.dataset.intensity);
 
-  intensityChips.forEach((c) => {
-    c.classList.toggle("active", parseFloat(c.dataset.percent) === val);
+    // Set intensity
+    selectedIntensity = val;
+    saveLS("intensity", val);
+
+    // Update chips visually
+    intensityChips.forEach((c) =>
+      c.classList.toggle("active", parseFloat(c.dataset.percent) === val)
+    );
   });
-}
+});
 
 // -------------------------
 // BRINE
@@ -122,7 +122,6 @@ const saltTypeBrineSelect = document.getElementById("saltTypeBrine");
 const brineResultDiv = document.getElementById("brineResult");
 const calcBrineBtn = document.getElementById("calcBrine");
 
-// Load brine values
 waterAmountInput.value = loadLS("waterAmount", "");
 brinePercentInput.value = loadLS("brinePercent", "");
 saltTypeBrineSelect.value = loadLS("saltTypeBrine", "fine");
@@ -147,22 +146,21 @@ calcBrineBtn.addEventListener("click", () => {
 
   const gramsSalt = waterMl * (brinePct / 100);
 
-  let usageHint =
+  const usageHint =
     brinePct <= 3 ? "Light brine." :
-    brinePct <= 8 ? "Ideal for poultry/meat." :
-    "Strong pickling brine — reduce soak time.";
+    brinePct <= 8 ? "Poultry/meat brine." :
+    "Strong pickling brine.";
 
-  const saltNotes = {
-    fine: "Fine salt dissolves quickest in cold water.",
-    kosher: "Kosher salt makes smoother brines.",
-    sea: "Coarse sea salt dissolves slower."
+  const notes = {
+    fine: "Fine salt dissolves quickly.",
+    kosher: "Kosher salt creates smoother brines.",
+    sea: "Sea salt dissolves slower — stir well."
   };
 
   brineResultDiv.innerHTML = `
     <p><strong>${gramsSalt.toFixed(1)} g</strong> salt required.</p>
-    <p style="margin-top:4px;color:#9ca3af;font-size:0.8rem;">
-      Brine strength: <strong>${brinePct.toFixed(1)}%</strong>.
-      ${usageHint}<br>Note: ${saltNotes[saltType]}
+    <p style="color:#9ca3af;font-size:0.8rem;margin-top:4px;">
+      Strength: <strong>${brinePct.toFixed(1)}%</strong> — ${usageHint}<br>${notes[saltType]}
     </p>
   `;
 });
@@ -170,16 +168,15 @@ calcBrineBtn.addEventListener("click", () => {
 // -------------------------
 // BRINE PRESETS
 // -------------------------
-const brinePresets = {
-  light: 3,
-  poultry: 6,
-  pickling: 10
-};
+const brinePresetBtns = document.querySelectorAll(".ss-preset-brine");
 
-function applyBrinePreset(val) {
-  brinePercentInput.value = val;
-  saveLS("brinePercent", val);
-}
+brinePresetBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const val = parseFloat(btn.dataset.percent);
+    brinePercentInput.value = val;
+    saveLS("brinePercent", val);
+  });
+});
 
 // -------------------------
 // RECIPE SCALING
@@ -190,7 +187,7 @@ const newTotalInput = document.getElementById("newTotal");
 const scalingResultDiv = document.getElementById("scalingResult");
 const calcScalingBtn = document.getElementById("calcScaling");
 
-// Load saved values
+// load saved
 origTotalInput.value = loadLS("origTotal", "");
 origSaltInput.value = loadLS("origSalt", "");
 newTotalInput.value = loadLS("newTotal", "");
@@ -205,7 +202,7 @@ calcScalingBtn.addEventListener("click", () => {
   saveLS("newTotal", newTotal);
 
   if (!origTotal || !origSalt || !newTotal || origTotal <= 0 || newTotal <= 0) {
-    scalingResultDiv.textContent = "Enter all values.";
+    scalingResultDiv.textContent = "Enter valid values.";
     return;
   }
 
@@ -214,9 +211,9 @@ calcScalingBtn.addEventListener("click", () => {
   const saltPct = (newSalt / newTotal) * 100;
 
   scalingResultDiv.innerHTML = `
-    <p>Use <strong>${newSalt.toFixed(1)} g</strong> salt.</p>
-    <p style="margin-top:4px;color:#9ca3af;font-size:0.8rem;">
-      Final salt concentration: <strong>${saltPct.toFixed(2)}%</strong>.
+    <p><strong>${newSalt.toFixed(1)} g</strong> salt for the new batch.</p>
+    <p style="color:#9ca3af;font-size:0.8rem;margin-top:4px;">
+      Final salt concentration: <strong>${saltPct.toFixed(2)}%</strong>
     </p>
   `;
 });
