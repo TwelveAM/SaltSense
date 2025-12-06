@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SaltSense – Seasoning & Brine Calculator</title>
+  <title>SaltSense – Precision Seasoning Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SaltSense helps chefs accurately calculate salt for seasoning, brines, and recipe scaling. No more guessing, just precise seasoning.">
+  <meta name="description" content="SaltSense calculates precise grams of salt for seasoning, brines, and recipe scaling. No teaspoons, no tablespoons—just real chef accuracy.">
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <script defer src="assets/app.js"></script>
@@ -13,7 +13,7 @@
   <header class="ss-header">
     <div class="ss-header-inner">
       <h1>SaltSense</h1>
-      <p>Stop guessing. Start seasoning with precision.</p>
+      <p>Stop guessing. Start seasoning like a pro.</p>
     </div>
   </header>
 
@@ -24,9 +24,10 @@
       <button class="ss-tab-btn" data-target="scaling">Recipe Scaling</button>
     </nav>
 
-    <!-- General Seasoning -->
+    <!-- GENERAL SEASONING -->
     <section id="general" class="ss-card ss-card-active">
-      <h2>General Seasoning Calculator</h2>
+      <h2>General Seasoning</h2>
+
       <div class="ss-field-row">
         <label for="foodWeight">Food weight</label>
         <div class="ss-inline-input">
@@ -45,11 +46,11 @@
       </div>
 
       <div class="ss-field-row">
-        <label for="saltTypeGeneral">Salt type</label>
+        <label for="saltTypeGeneral">Salt type (for notes only)</label>
         <select id="saltTypeGeneral">
-          <option value="table">Fine table salt</option>
-          <option value="kosher">Kosher salt</option>
-          <option value="sea">Coarse sea salt</option>
+          <option value="fine">Fine salt (fast dissolving)</option>
+          <option value="kosher">Kosher salt (milder salinity)</option>
+          <option value="sea">Coarse sea salt (slow melting)</option>
         </select>
       </div>
 
@@ -58,9 +59,9 @@
       <div id="generalResult" class="ss-result"></div>
     </section>
 
-    <!-- Brine -->
+    <!-- BRINE -->
     <section id="brine" class="ss-card">
-      <h2>Brine / Pickling Calculator</h2>
+      <h2>Brine / Pickling</h2>
 
       <div class="ss-field-row">
         <label for="waterAmount">Water amount</label>
@@ -77,14 +78,14 @@
           <span class="ss-unit">%</span>
         </div>
         <p class="ss-hint">
-          2–3% light | 5–8% brine | 8–12% strong pickling
+          2–3% light · 5–8% poultry · 8–12% pickling
         </p>
       </div>
 
       <div class="ss-field-row">
-        <label for="saltTypeBrine">Salt type</label>
+        <label for="saltTypeBrine">Salt type (for notes only)</label>
         <select id="saltTypeBrine">
-          <option value="table">Fine table salt</option>
+          <option value="fine">Fine salt</option>
           <option value="kosher">Kosher salt</option>
           <option value="sea">Coarse sea salt</option>
         </select>
@@ -95,22 +96,22 @@
       <div id="brineResult" class="ss-result"></div>
     </section>
 
-    <!-- Recipe Scaling -->
+    <!-- SCALING -->
     <section id="scaling" class="ss-card">
       <h2>Recipe & Salt Scaling</h2>
 
       <div class="ss-field-row">
-        <label for="origTotal">Original total (weight or portions)</label>
+        <label for="origTotal">Original total (g or portions)</label>
         <input type="number" id="origTotal" min="0.1" step="0.1" placeholder="e.g. 10">
       </div>
 
       <div class="ss-field-row">
-        <label for="origSalt">Original salt amount (g)</label>
+        <label for="origSalt">Original salt (g)</label>
         <input type="number" id="origSalt" min="0" step="0.1" placeholder="e.g. 12">
       </div>
 
       <div class="ss-field-row">
-        <label for="newTotal">New total (weight or portions)</label>
+        <label for="newTotal">New total (g or portions)</label>
         <input type="number" id="newTotal" min="0.1" step="0.1" placeholder="e.g. 35">
       </div>
 
@@ -118,10 +119,11 @@
 
       <div id="scalingResult" class="ss-result"></div>
     </section>
+
   </main>
 
   <footer class="ss-footer">
-    <p>SaltSense – precision seasoning for real kitchens.</p>
+    <p>SaltSense — precise seasoning for real kitchens.</p>
   </footer>
 </body>
 </html>
