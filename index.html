@@ -11,144 +11,147 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/SALT-32x32.png">
   <link rel="shortcut icon" href="assets/SALT-32x32.png">
 
-  <link rel="preload" as="image" href="assets/saltsense-banner.png">
-
   <link rel="stylesheet" href="assets/styles.css">
   <script defer src="assets/app.js"></script>
 </head>
 
 <body>
 
-  <!-- HEADER WITH PERFECT-SIZE BANNER -->
-  <header class="ss-header">
-    <div class="ss-header-inner banner-wrap">
-      <img src="assets/saltsense-banner.png" alt="SaltSense Logo" class="banner-img">
+<header class="ss-header">
+  <div class="banner-wrap">
+    <img src="assets/saltsense-banner.png" class="banner-img" alt="SaltSense Logo">
+  </div>
+</header>
+
+<main class="ss-main">
+
+  <nav class="ss-nav">
+    <button class="ss-tab-btn active" data-target="general">General Seasoning</button>
+    <button class="ss-tab-btn" data-target="brine">Brine / Pickling</button>
+    <button class="ss-tab-btn" data-target="scaling">Recipe Scaling</button>
+  </nav>
+
+  <!-- ================= General Seasoning ================= -->
+  <section id="general" class="ss-card ss-card-active">
+    <h2>General Seasoning</h2>
+
+    <div class="ss-field-row">
+      <label>Presets</label>
+      <div class="ss-chip-row">
+        <button class="ss-chip ss-preset-general" data-intensity="1.2">Chicken (1.2%)</button>
+        <button class="ss-chip ss-preset-general" data-intensity="1.7">Steak (1.7%)</button>
+        <button class="ss-chip ss-preset-general" data-intensity="1.0">Vegetables (1.0%)</button>
+        <button class="ss-chip ss-preset-general" data-intensity="1.4">Sauce (1.4%)</button>
+      </div>
     </div>
-  </header>
 
-  <main class="ss-main">
-
-    <nav class="ss-nav">
-      <button class="ss-tab-btn active" data-target="general">General Seasoning</button>
-      <button class="ss-tab-btn" data-target="brine">Brine / Pickling</button>
-      <button class="ss-tab-btn" data-target="scaling">Recipe Scaling</button>
-    </nav>
-
-    <!-- ================= GENERAL ================= -->
-    <section id="general" class="ss-card ss-card-active">
-      <h2>General Seasoning</h2>
-
-      <div class="ss-field-row">
-        <label>Presets</label>
-        <div class="ss-chip-row">
-          <button class="ss-chip ss-preset-general" data-intensity="1.2">Chicken (1.2%)</button>
-          <button class="ss-chip ss-preset-general" data-intensity="1.7">Steak (1.7%)</button>
-          <button class="ss-chip ss-preset-general" data-intensity="1.0">Vegetables (1.0%)</button>
-          <button class="ss-chip ss-preset-general" data-intensity="1.4">Sauce (1.4%)</button>
-        </div>
+    <div class="ss-field-row">
+      <label for="foodWeight">Food weight</label>
+      <div class="ss-inline-input">
+        <input type="number" id="foodWeight" min="1" placeholder="e.g. 850">
+        <span class="ss-unit">g</span>
       </div>
+    </div>
 
-      <div class="ss-field-row">
-        <label for="foodWeight">Food weight</label>
-        <div class="ss-inline-input">
-          <input type="number" id="foodWeight" min="1" placeholder="e.g. 850">
-          <span class="ss-unit">g</span>
-        </div>
+    <div class="ss-field-row">
+      <label>Salt intensity</label>
+      <div class="ss-chip-row">
+        <button class="ss-chip ss-chip-intensity" data-percent="1.0">Light (1.0%)</button>
+        <button class="ss-chip ss-chip-intensity" data-percent="1.5">Medium (1.5%)</button>
+        <button class="ss-chip ss-chip-intensity" data-percent="2.0">Bold (2.0%)</button>
       </div>
+    </div>
 
-      <div class="ss-field-row">
-        <label>Salt intensity</label>
-        <div class="ss-chip-row">
-          <button class="ss-chip ss-chip-intensity" data-percent="1.0">Light (1.0%)</button>
-          <button class="ss-chip ss-chip-intensity" data-percent="1.5">Medium (1.5%)</button>
-          <button class="ss-chip ss-chip-intensity" data-percent="2.0">Bold (2.0%)</button>
-        </div>
+    <div class="ss-field-row">
+      <label for="saltTypeGeneral">Salt type (note only)</label>
+      <select id="saltTypeGeneral">
+        <option value="fine">Fine salt</option>
+        <option value="kosher">Kosher salt</option>
+        <option value="sea">Sea salt</option>
+      </select>
+    </div>
+
+    <button id="calcGeneral" class="ss-primary-btn">Calculate</button>
+    <div id="generalResult" class="ss-result"></div>
+  </section>
+
+  <!-- ================= Brine ================= -->
+  <section id="brine" class="ss-card">
+    <h2>Brine / Pickling</h2>
+
+    <div class="ss-field-row">
+      <label>Presets</label>
+      <div class="ss-chip-row">
+        <button class="ss-chip ss-preset-brine" data-percent="3">Light (3%)</button>
+        <button class="ss-chip ss-preset-brine" data-percent="6">Poultry (6%)</button>
+        <button class="ss-chip ss-preset-brine" data-percent="10">Pickling (10%)</button>
       </div>
+    </div>
 
-      <div class="ss-field-row">
-        <label for="saltTypeGeneral">Salt type (note only)</label>
-        <select id="saltTypeGeneral">
-          <option value="fine">Fine salt</option>
-          <option value="kosher">Kosher salt</option>
-          <option value="sea">Sea salt</option>
-        </select>
+    <div class="ss-field-row">
+      <label for="waterAmount">Water amount</label>
+      <div class="ss-inline-input">
+        <input type="number" id="waterAmount" min="1" placeholder="e.g. 2000">
+        <span class="ss-unit">ml</span>
       </div>
+    </div>
 
-      <button id="calcGeneral" class="ss-primary-btn">Calculate</button>
-      <div id="generalResult" class="ss-result"></div>
-    </section>
-
-    <!-- ================= BRINE ================= -->
-    <section id="brine" class="ss-card">
-      <h2>Brine / Pickling</h2>
-
-      <div class="ss-field-row">
-        <label>Presets</label>
-        <div class="ss-chip-row">
-          <button class="ss-chip ss-preset-brine" data-percent="3">Light (3%)</button>
-          <button class="ss-chip ss-preset-brine" data-percent="6">Poultry (6%)</button>
-          <button class="ss-chip ss-preset-brine" data-percent="10">Pickling (10%)</button>
-        </div>
+    <div class="ss-field-row">
+      <label for="brinePercent">Brine percentage</label>
+      <div class="ss-inline-input">
+        <input type="number" id="brinePercent" min="0.1" max="20" step="0.1">
+        <span class="ss-unit">%</span>
       </div>
+    </div>
 
-      <div class="ss-field-row">
-        <label for="waterAmount">Water amount</label>
-        <div class="ss-inline-input">
-          <input type="number" id="waterAmount" min="1" placeholder="e.g. 2000">
-          <span class="ss-unit">ml</span>
-        </div>
-      </div>
+    <div class="ss-field-row">
+      <label for="saltTypeBrine">Salt type (note only)</label>
+      <select id="saltTypeBrine">
+        <option value="fine">Fine salt</option>
+        <option value="kosher">Kosher salt</option>
+        <option value="sea">Sea salt</option>
+      </select>
+    </div>
 
-      <div class="ss-field-row">
-        <label for="brinePercent">Brine percentage</label>
-        <div class="ss-inline-input">
-          <input type="number" id="brinePercent" min="0.5" max="20" step="0.1" placeholder="e.g. 6">
-          <span class="ss-unit">%</span>
-        </div>
-        <p class="ss-hint">2–3% light · 5–8% poultry · 8–12% pickling</p>
-      </div>
+    <button id="calcBrine" class="ss-primary-btn">Calculate</button>
+    <div id="brineResult" class="ss-result"></div>
 
-      <div class="ss-field-row">
-        <label for="saltTypeBrine">Salt type (note only)</label>
-        <select id="saltTypeBrine">
-          <option value="fine">Fine salt</option>
-          <option value="kosher">Kosher salt</option>
-          <option value="sea">Sea salt</option>
-        </select>
-      </div>
+  </section>
 
-      <button id="calcBrine" class="ss-primary-btn">Calculate</button>
-      <div id="brineResult" class="ss-result"></div>
-    </section>
+  <!-- ================= Scaling ================= -->
+  <section id="scaling" class="ss-card">
+    <h2>Recipe Scaling</h2>
 
-    <!-- ================= SCALING ================= -->
-    <section id="scaling" class="ss-card">
-      <h2>Recipe Scaling</h2>
+    <p class="ss-explain">
+      Scale recipes up or down while keeping the <strong>same salt intensity</strong>.
+      Enter your original total weight and salt amount, then the new total weight you want.
+      SaltSense will calculate the exact amount of salt needed to keep the flavor identical.
+    </p>
 
-      <div class="ss-field-row">
-        <label for="origTotal">Original total</label>
-        <input type="number" id="origTotal" min="0.1" step="0.1">
-      </div>
+    <div class="ss-field-row">
+      <label for="origTotal">Original total</label>
+      <input type="number" id="origTotal">
+    </div>
 
-      <div class="ss-field-row">
-        <label for="origSalt">Original salt (g)</label>
-        <input type="number" id="origSalt" min="0" step="0.1">
-      </div>
+    <div class="ss-field-row">
+      <label for="origSalt">Original salt (g)</label>
+      <input type="number" id="origSalt">
+    </div>
 
-      <div class="ss-field-row">
-        <label for="newTotal">New total</label>
-        <input type="number" id="newTotal" min="0.1" step="0.1">
-      </div>
+    <div class="ss-field-row">
+      <label for="newTotal">New total</label>
+      <input type="number" id="newTotal">
+    </div>
 
-      <button id="calcScaling" class="ss-primary-btn">Calculate</button>
-      <div id="scalingResult" class="ss-result"></div>
-    </section>
+    <button id="calcScaling" class="ss-primary-btn">Calculate</button>
+    <div id="scalingResult" class="ss-result"></div>
+  </section>
 
-  </main>
+</main>
 
-  <footer class="ss-footer">
-    SaltSense — precise seasoning for real kitchens.
-  </footer>
+<footer class="ss-footer">
+  SaltSense — precise seasoning for real kitchens.
+</footer>
 
 </body>
 </html>
