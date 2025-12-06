@@ -5,7 +5,14 @@
   <title>SaltSense – Precision Seasoning Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="SaltSense calculates precise grams of salt for seasoning, brines, and recipe scaling. No spoons — just real chef precision.">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#047857">
 
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+  }
+</script>
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="16x16" href="assets/SALT-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/SALT-32x32.png">
