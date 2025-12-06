@@ -5,7 +5,9 @@ const ASSETS = [
   "assets/styles.css",
   "assets/app.js",
   "assets/saltsense-banner.png",
-  "manifest.json"
+  "manifest.json",
+  "assets/icons/icon-192.png",
+  "assets/icons/icon-512.png"
 ];
 
 // Install — cache everything
