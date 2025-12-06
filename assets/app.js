@@ -1,8 +1,10 @@
 // ---------- Local Storage ----------
-function saveLS(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
-function loadLS(k, fb=null) {
-  const v = localStorage.getItem(k);
-  return v ? JSON.parse(v) : fb;
+function saveLS(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+function loadLS(key, fallback = null) {
+  const v = localStorage.getItem(key);
+  return v ? JSON.parse(v) : fallback;
 }
 
 // ---------- Tabs ----------
@@ -31,8 +33,6 @@ intensityChips.forEach(chip => {
 
     selectedIntensity = parseFloat(chip.dataset.percent);
     saveLS("intensity", selectedIntensity);
-
-    // DO NOT clear preset highlight
   });
 });
 
@@ -43,11 +43,11 @@ const saltTypeGeneralSelect = document.getElementById("saltTypeGeneral");
 foodWeightInput.value = loadLS("foodWeight", "");
 saltTypeGeneralSelect.value = loadLS("saltTypeGeneral", "fine");
 
-document.getElementById("calcGeneral").addEventListener("click", () => {
+calcGeneral.addEventListener("click", () => {
   const w = parseFloat(foodWeightInput.value);
   const saltType = saltTypeGeneralSelect.value;
 
-  saveLS("foodWeight", w);
+  saveLS("foodWeight", foodWeightInput.value);
   saveLS("saltTypeGeneral", saltType);
 
   if (!w || w <= 0) {
@@ -60,7 +60,7 @@ document.getElementById("calcGeneral").addEventListener("click", () => {
   const notes = {
     fine: "Fine salt dissolves fast.",
     kosher: "Kosher salt is milder.",
-    sea: "Sea salt melts slower.",
+    sea: "Sea salt melts slower."
   };
 
   generalResult.innerHTML = `
@@ -70,9 +70,7 @@ document.getElementById("calcGeneral").addEventListener("click", () => {
 });
 
 // ---------- General Presets ----------
-const generalPresetBtns = document.querySelectorAll(".ss-preset-general");
-
-generalPresetBtns.forEach(btn => {
+document.querySelectorAll(".ss-preset-general").forEach(btn => {
   btn.addEventListener("click", () => {
     const val = parseFloat(btn.dataset.intensity);
 
@@ -83,7 +81,9 @@ generalPresetBtns.forEach(btn => {
       c.classList.toggle("active", parseFloat(c.dataset.percent) === val)
     );
 
-    generalPresetBtns.forEach(p => p.classList.remove("active"));
+    document.querySelectorAll(".ss-preset-general")
+      .forEach(p => p.classList.remove("active"));
+
     btn.classList.add("active");
   });
 });
@@ -98,11 +98,11 @@ calcBrine.addEventListener("click", () => {
   const pct = parseFloat(brinePercent.value);
   const st = saltTypeBrine.value;
 
-  saveLS("waterAmount", w);
-  saveLS("brinePercent", pct);
+  saveLS("waterAmount", waterAmount.value);
+  saveLS("brinePercent", brinePercent.value);
   saveLS("saltTypeBrine", st);
 
-  if (!w || !pct) {
+  if (!w || !pct || w <= 0 || pct <= 0) {
     brineResult.textContent = "Enter valid values.";
     return;
   }
@@ -115,21 +115,21 @@ calcBrine.addEventListener("click", () => {
 });
 
 // ---------- Brine Presets ----------
-const brinePresetBtns = document.querySelectorAll(".ss-preset-brine");
-
-brinePresetBtns.forEach(btn => {
+document.querySelectorAll(".ss-preset-brine").forEach(btn => {
   btn.addEventListener("click", () => {
     const val = btn.dataset.percent;
 
     brinePercent.value = val;
     saveLS("brinePercent", val);
 
-    brinePresetBtns.forEach(p => p.classList.remove("active"));
+    document.querySelectorAll(".ss-preset-brine")
+      .forEach(p => p.classList.remove("active"));
+
     btn.classList.add("active");
   });
 });
 
-// ---------- Scaling ----------
+// ---------- Recipe Scaling ----------
 origTotal.value = loadLS("origTotal", "");
 origSalt.value = loadLS("origSalt", "");
 newTotal.value = loadLS("newTotal", "");
@@ -139,24 +139,23 @@ calcScaling.addEventListener("click", () => {
   const oS = parseFloat(origSalt.value);
   const nT = parseFloat(newTotal.value);
 
-  // Save entries
   saveLS("origTotal", origTotal.value);
   saveLS("origSalt", origSalt.value);
   saveLS("newTotal", newTotal.value);
 
-  // Empty fields → do nothing (no error)
+  // Empty fields → keep helper text
   if (origTotal.value === "" || origSalt.value === "" || newTotal.value === "") {
-    scalingResult.innerHTML = "";
+    scalingResult.innerHTML =
+      "Enter all values to scale your recipe while keeping the same salt intensity.";
     return;
   }
 
-  // Invalid numbers → show error
+  // Invalid values
   if (!oT || !oS || !nT || oT <= 0 || oS < 0 || nT <= 0) {
     scalingResult.textContent = "Enter valid values.";
     return;
   }
 
-  // Valid → calculate
   const nS = oS * (nT / oT);
 
   scalingResult.innerHTML = `
