@@ -16,10 +16,17 @@ body {
   border-bottom: 1px solid #1f2937;
 }
 
-.ss-header-inner {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 16px;
+.banner-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.banner-img {
+  width: 630px;
+  height: 130px;
+  object-fit: contain;
 }
 
 .ss-main {
@@ -32,17 +39,15 @@ body {
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
-  flex-wrap: wrap;
 }
 
 .ss-tab-btn {
-  flex: 1 1 auto;
+  flex: 1;
   padding: 10px 12px;
   border-radius: 999px;
   border: 1px solid #374151;
   background: #020617;
   color: #e5e7eb;
-  font-size: 0.9rem;
   cursor: pointer;
 }
 
@@ -54,80 +59,27 @@ body {
 .ss-card {
   display: none;
   background: #020617;
-  border-radius: 18px;
   border: 1px solid #1f2937;
-  padding: 18px 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border-radius: 18px;
+  padding: 18px;
 }
 
 .ss-card-active {
   display: block;
 }
 
-.ss-card h2 {
-  margin-top: 0;
-  font-size: 1.2rem;
-}
-
-.ss-field-row {
-  margin-bottom: 16px;
-}
-
-.ss-field-row label {
-  font-size: 0.85rem;
-  color: #d1d5db;
-  margin-bottom: 4px;
-  display: block;
-}
-
-.ss-inline-input {
-  display: flex;
-  gap: 6px;
-}
-
-.ss-unit {
-  padding: 8px 10px;
-  border-radius: 12px;
-  border: 1px solid #374151;
-  background: #020617;
-  color: #9ca3af;
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 8px 10px;
-  border-radius: 12px;
-  border: 1px solid #374151;
-  background: #020617;
-  color: #e5e7eb;
-  font-size: 0.9rem;
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #22c55e;
-}
-
-/* CHIP STYLES (Intensity + Presets) */
 .ss-chip-row {
   display: flex;
-  gap: 6px;
   flex-wrap: wrap;
+  gap: 6px;
 }
 
 .ss-chip {
-  border-radius: 999px;
   border: 1px solid #374151;
-  background: #020617;
   padding: 6px 10px;
-  font-size: 0.8rem;
+  border-radius: 999px;
+  background: #020617;
   cursor: pointer;
-  color: #e5e7eb;
 }
 
 .ss-chip.active {
@@ -135,39 +87,37 @@ select:focus {
   border-color: #16a34a;
 }
 
+.ss-inline-input {
+  display: flex;
+}
+
+.ss-unit {
+  padding: 8px 12px;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  margin-left: 6px;
+  background: #020617;
+}
+
 .ss-primary-btn {
-  margin-top: 4px;
+  margin-top: 10px;
   padding: 10px 14px;
   border-radius: 999px;
   background: #16a34a;
   border: none;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.ss-primary-btn:hover {
-  background: #22c55e;
 }
 
 .ss-result {
   margin-top: 14px;
-  padding: 12px;
-  border-radius: 14px;
-  background: #020617;
   border: 1px solid #1f2937;
-  font-size: 0.9rem;
-}
-
-.ss-hint {
-  margin-top: 6px;
-  font-size: 0.75rem;
-  color: #9ca3af;
+  background: #020617;
+  padding: 12px;
+  border-radius: 12px;
 }
 
 .ss-footer {
   text-align: center;
-  font-size: 0.8rem;
-  color: #6b7280;
   margin-top: 30px;
+  color: #6b7280;
 }
