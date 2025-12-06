@@ -45,6 +45,9 @@ intensityChips.forEach((chip) => {
 
     selectedIntensity = parseFloat(chip.dataset.percent);
     saveLS("intensity", selectedIntensity);
+
+    // Clear general preset highlights
+    generalPresetBtns.forEach((p) => p.classList.remove("active"));
   });
 });
 
@@ -80,21 +83,21 @@ calcGeneralBtn.addEventListener("click", () => {
 
   const notes = {
     fine: "Fine salt dissolves fast and evenly.",
-    kosher: "Kosher salt is milder, great for control.",
+    kosher: "Kosher salt is milder and easier to control.",
     sea: "Sea salt melts slower — good for finishing."
   };
 
   generalResultDiv.innerHTML = `
     <p><strong>${saltGrams.toFixed(1)} g</strong> salt needed.</p>
     <p style="color:#9ca3af;font-size:0.8rem;margin-top:4px;">
-      Intensity: <strong>${intensityLabel}</strong> (${selectedIntensity.toFixed(1)}%)
-      <br>${notes[saltType]}
+      Intensity: <strong>${intensityLabel}</strong> (${selectedIntensity.toFixed(1)}%)<br>
+      ${notes[saltType]}
     </p>
   `;
 });
 
 // -------------------------
-// GENERAL PRESETS
+// GENERAL PRESETS (WITH HIGHLIGHT)
 // -------------------------
 const generalPresetBtns = document.querySelectorAll(".ss-preset-general");
 
@@ -102,19 +105,23 @@ generalPresetBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     const val = parseFloat(btn.dataset.intensity);
 
-    // Set intensity
+    // Update intensity
     selectedIntensity = val;
     saveLS("intensity", val);
 
-    // Update chips visually
+    // Highlight correct intensity chip
     intensityChips.forEach((c) =>
       c.classList.toggle("active", parseFloat(c.dataset.percent) === val)
     );
+
+    // Highlight selected preset
+    generalPresetBtns.forEach((p) => p.classList.remove("active"));
+    btn.classList.add("active");
   });
 });
 
 // -------------------------
-// BRINE
+// BRINE SECTION
 // -------------------------
 const waterAmountInput = document.getElementById("waterAmount");
 const brinePercentInput = document.getElementById("brinePercent");
@@ -148,7 +155,7 @@ calcBrineBtn.addEventListener("click", () => {
 
   const usageHint =
     brinePct <= 3 ? "Light brine." :
-    brinePct <= 8 ? "Poultry/meat brine." :
+    brinePct <= 8 ? "Poultry / meat brine." :
     "Strong pickling brine.";
 
   const notes = {
@@ -160,21 +167,27 @@ calcBrineBtn.addEventListener("click", () => {
   brineResultDiv.innerHTML = `
     <p><strong>${gramsSalt.toFixed(1)} g</strong> salt required.</p>
     <p style="color:#9ca3af;font-size:0.8rem;margin-top:4px;">
-      Strength: <strong>${brinePct.toFixed(1)}%</strong> — ${usageHint}<br>${notes[saltType]}
+      Strength: <strong>${brinePct.toFixed(1)}%</strong> — ${usageHint}<br>
+      ${notes[saltType]}
     </p>
   `;
 });
 
 // -------------------------
-// BRINE PRESETS
+// BRINE PRESETS (WITH HIGHLIGHT)
 // -------------------------
 const brinePresetBtns = document.querySelectorAll(".ss-preset-brine");
 
 brinePresetBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     const val = parseFloat(btn.dataset.percent);
+
     brinePercentInput.value = val;
     saveLS("brinePercent", val);
+
+    // Highlight selected preset
+    brinePresetBtns.forEach((p) => p.classList.remove("active"));
+    btn.classList.add("active");
   });
 });
 
@@ -187,7 +200,6 @@ const newTotalInput = document.getElementById("newTotal");
 const scalingResultDiv = document.getElementById("scalingResult");
 const calcScalingBtn = document.getElementById("calcScaling");
 
-// load saved
 origTotalInput.value = loadLS("origTotal", "");
 origSaltInput.value = loadLS("origSalt", "");
 newTotalInput.value = loadLS("newTotal", "");
