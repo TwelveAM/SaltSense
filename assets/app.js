@@ -165,3 +165,42 @@ calcScaling.addEventListener("click", () => {
     </p>
   `;
 });
+// =============== PWA INSTALL POPUP ===============
+let deferredPrompt;
+
+// Detect install availability
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  if (!localStorage.getItem("installDismissed")) {
+    document.getElementById("installPrompt").classList.remove("hidden");
+  }
+});
+
+// Install button clicked
+document.getElementById("installBtn").addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+
+  deferredPrompt.prompt();
+  const choice = await deferredPrompt.userChoice;
+
+  if (choice.outcome === "accepted") {
+    console.log("PWA installed");
+  }
+
+  document.getElementById("installPrompt").classList.add("hidden");
+  deferredPrompt = null;
+});
+
+// Dismiss button clicked
+document.getElementById("dismissInstall").addEventListener("click", () => {
+  document.getElementById("installPrompt").classList.add("hidden");
+  localStorage.setItem("installDismissed", "1");
+});
+
+// Hide popup if already installed
+window.addEventListener("appinstalled", () => {
+  localStorage.setItem("installDismissed", "1");
+  document.getElementById("installPrompt").classList.add("hidden");
+});
