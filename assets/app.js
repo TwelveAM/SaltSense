@@ -139,18 +139,30 @@ calcScaling.addEventListener("click", () => {
   const oS = parseFloat(origSalt.value);
   const nT = parseFloat(newTotal.value);
 
-  saveLS("origTotal", oT);
-  saveLS("origSalt", oS);
-  saveLS("newTotal", nT);
+  // Save entries
+  saveLS("origTotal", origTotal.value);
+  saveLS("origSalt", origSalt.value);
+  saveLS("newTotal", newTotal.value);
 
-  if (!oT || !oS || !nT) {
+  // Empty fields → do nothing (no error)
+  if (origTotal.value === "" || origSalt.value === "" || newTotal.value === "") {
+    scalingResult.innerHTML = "";
+    return;
+  }
+
+  // Invalid numbers → show error
+  if (!oT || !oS || !nT || oT <= 0 || oS < 0 || nT <= 0) {
     scalingResult.textContent = "Enter valid values.";
     return;
   }
 
+  // Valid → calculate
   const nS = oS * (nT / oT);
 
   scalingResult.innerHTML = `
-    <strong>${nS.toFixed(1)} g</strong> salt needed.
+    <p><strong>${nS.toFixed(1)} g</strong> salt needed.</p>
+    <p style="color:#9ca3af;font-size:0.85rem;">
+      Same salt concentration as original recipe.
+    </p>
   `;
 });
