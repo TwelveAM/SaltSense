@@ -90,6 +90,15 @@ body {
   font-size: 1.3rem;
 }
 
+/* Small explanation text */
+.ss-explain {
+  margin-top: -4px;
+  margin-bottom: 18px;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  line-height: 1.35rem;
+}
+
 /* ============================================
    FORM FIELDS
 ============================================ */
@@ -154,7 +163,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-/* ---------- CUSTOM CSS ARROW ---------- */
+/* ---------- CUSTOM DOWN ARROW ---------- */
 input[type=number] {
   position: relative;
   padding-right: 28px; /* space for arrow */
